@@ -1,17 +1,14 @@
-
-import { Card, CardContent } from './ui/card'
-import { Skeleton } from './ui/skeleton'
-
 export function UserCardSkeleton() {
   return (
-    <Card>
-      <CardContent className="p-4 flex items-center gap-3">
-        <Skeleton className="w-10 h-10 rounded-full shrink-0" />
-        <div className="flex-1 space-y-2">
-          <Skeleton className="h-4 w-3/4" />
-          <Skeleton className="h-3 w-1/2" />
-        </div>
-      </CardContent>
-    </Card>
+    <div
+      className="flex items-center gap-4 rounded-2xl"
+      style={{ background: '#fff', border: '0.5px solid #ebe9fb', padding: '14px 16px' }}
+    >
+      <div className="rounded-xl shrink-0 animate-pulse" style={{ width: 42, height: 42, background: '#EEEDFE' }} />
+      <div className="flex-1 space-y-2">
+        <div className="h-3.5 rounded-full animate-pulse" style={{ background: '#f0eff9', width: '55%' }} />
+        <div className="h-3 rounded-full animate-pulse" style={{ background: '#f0eff9', width: '40%' }} />
+      </div>
+    </div>
   )
 }
