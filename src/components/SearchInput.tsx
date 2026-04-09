@@ -1,4 +1,4 @@
-import { Input } from './ui/input'
+import { Search } from 'lucide-react'
 
 interface SearchInputProps {
   value: string
@@ -7,18 +7,25 @@ interface SearchInputProps {
 
 export function SearchInput({ value, onChange }: SearchInputProps) {
   return (
-    <div className="relative">
-      <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4"
-        fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
-      >
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <Input
+    <div className="relative -mt-5 mx-6 z-10">
+      <Search
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4"
+        style={{ color: '#AFA9EC' }}
+      />
+      <input
+        type="text"
         placeholder="Buscar por nome..."
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="pl-9"
+        className="w-full rounded-2xl text-sm outline-none"
+        style={{
+          background: 'rgba(255,255,255,0.55)',
+          backdropFilter: 'blur(8px)',
+          border: '0.5px solid rgba(175,169,236,0.4)',
+          padding: '12px 16px 12px 44px',
+          color: '#3C3489',
+          boxShadow: '0 2px 12px rgba(127,119,221,0.10)',
+        }}
       />
     </div>
   )
