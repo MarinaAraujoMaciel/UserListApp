@@ -1,3 +1,4 @@
+import { AlertTriangle } from 'lucide-react'
 import { Button } from './ui/button'
 
 interface ErrorStateProps {
@@ -7,10 +8,12 @@ interface ErrorStateProps {
 
 export function ErrorState({ message, onRetry }: ErrorStateProps) {
   return (
-    <div className="text-center py-16 space-y-3">
-      <p className="text-4xl">⚠️</p>
-      <p className="font-medium text-destructive">{message}</p>
-      <Button variant="outline" onClick={onRetry}>
+    <div className="text-center py-16">
+      <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mx-auto mb-4">
+        <AlertTriangle className="w-5 h-5 text-red-700" />
+      </div>
+      <p className="text-sm font-medium text-slate-800 mb-4">{message}</p>
+      <Button variant="outline" size="sm" onClick={onRetry}>
         Tentar novamente
       </Button>
     </div>
