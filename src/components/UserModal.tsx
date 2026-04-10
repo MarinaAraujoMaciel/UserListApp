@@ -15,13 +15,18 @@ interface UserModalProps {
 interface InfoRowProps {
   label: string
   value: string
+  accent?: boolean
 }
 
-function InfoRow({ label, value }: InfoRowProps) {
+function InfoRow({ label, value, accent = false }: InfoRowProps) {
   return (
-    <div className="flex flex-col gap-0.5">
-      <span className="text-xs text-muted-foreground uppercase tracking-wide">{label}</span>
-      <span className="text-sm font-medium">{value}</span>
+    <div className={`flex flex-col gap-1 rounded-lg p-3 ${accent ? 'bg-teal-50' : 'bg-slate-50'}`}>
+      <span className={`text-xs uppercase tracking-wide font-medium ${accent ? 'text-teal-700' : 'text-slate-400'}`}>
+        {label}
+      </span>
+      <span className={`text-sm font-medium ${accent ? 'text-teal-900' : 'text-slate-800'}`}>
+        {value}
+      </span>
     </div>
   )
 }
@@ -31,21 +36,33 @@ export function UserModal({ user, open, onClose }: UserModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
+      <DialogContent className="sm:max-w-md bg-white border-slate-200! outline-none! shadow-sm">
+
+        <DialogHeader className="pb-4 border-b border-slate-100">
+          <div className="flex items-center gap-4">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-medium shrink-0 ${
+              user.id % 2 === 0 ? 'bg-teal-50 text-teal-700' : 'bg-slate-100 text-slate-700'
+            }`}>
               {user.name.charAt(0)}
             </div>
-            <DialogTitle className="text-lg">{user.name}</DialogTitle>
+            <div>
+              <DialogTitle className="text-slate-800 text-base font-semibold">
+                {user.name}
+              </DialogTitle>
+              <p className="text-xs text-slate-500 mt-0.5">
+                {user.company.name}
+              </p>
+            </div>
           </div>
         </DialogHeader>
-        <div className="grid grid-cols-2 gap-4 pt-2">
-          <InfoRow label="Email" value={user.email} />
-          <InfoRow label="Telefone" value={user.phone} />
-          <InfoRow label="Empresa" value={user.company.name} />
-          <InfoRow label="Cidade" value={user.address.city} />
+
+        <div className="grid grid-cols-2 gap-3 pt-2">
+          <InfoRow label="Email"    value={user.email}        accent />
+          <InfoRow label="Telefone" value={user.phone}               />
+          <InfoRow label="Empresa"  value={user.company.name} accent />
+          <InfoRow label="Cidade"   value={user.address.city}        />
         </div>
+
       </DialogContent>
     </Dialog>
   )
